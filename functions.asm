@@ -116,6 +116,75 @@ Exit:
 
 PrintReverse:
     #TODO: write your code here, $a0 stores the address of the array, $a1 stores the length of the array
+    move $t4, $a0
+    move $t5, $a1
+    
+    #loop from the end of a0 to the beginning
+       # print
 
+    #t0 is the counter
+    move $t0, $t5 
+loop:
+    #exit loop condition 
+    addi $t0, $t0, -1
+    slt $t3, $t0, $zero
+    li $t7, 1
+    beq $t3, $t7, endloop
+    
+
+    sll $t1, $t0, 2
+    add $t1, $t1, $t4
+    lw $t2, 0($t1)
+   
+
+    # Store value of $ra into memory
+    addi $sp, $sp, -4
+    sw $ra, 0($sp)
+ 
+    # Store value of t4 into memory
+    addi $sp, $sp, -4
+    sw $t4, 0($sp)
+    
+    # Store value of t5 into memory
+    addi $sp, $sp, -4
+    sw $t5, 0($sp)
+    
+    # Store value of t0 into memory   
+    addi $sp, $sp, -4
+    sw $t0, 0($sp)
+
+    #Print the integer
+    li $v0, 1
+    move $a0, $t2
+    syscall
+    
+
+    jal ConventionCheck
+    li $t0, 0 
+    # Load value of t0 into memory
+    lw $t0, 0($sp)
+    addi $sp, $sp, 4
+
+  
+    # Load value of t5 into memory
+    lw $t5, 0($sp)
+    addi $sp, $sp, 4
+   
+     
+    # Load value of $t4 into memory
+    lw $t4, 0($sp)
+    addi $sp, $sp, 4
+    
+    lw $ra, 0($sp)
+    addi $sp, $sp, 4
+    
+    
+    j loop
+    
+
+endloop:
+    
+    #addi $sp, $sp, 8
+    
     # Do not remove this line
     jr      $ra
