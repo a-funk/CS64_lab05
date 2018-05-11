@@ -130,7 +130,7 @@ IterativeMax:
 	#max that we load in
 	lw $s1, 0($a0)
 	
-	#lenght of the array
+	#length of the array
 	addi $sp, $sp, -4
 	sw $s2, 0($sp)	
 	move $s2, $a1
@@ -167,11 +167,6 @@ endIF:
 	li $v0, 1
 	move $a0, $s1
 	syscall
-
-	#inc counter
-	#li $v0, 4
-	#la $a0, newline
-	#syscall
 	
 	addi $sp, $sp, -4
 	sw $ra, 0($sp)	
